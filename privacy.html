@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CreatorBlock – Privacy Policy</title>
+<link rel="icon" href="icon128.png">
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--muted:#5f6368;--accent:#1a73e8;--line:#e0e0e0}
+@media (prefers-color-scheme:dark){:root{--bg:#121212;--fg:#f1f1f1;--muted:#a8a8a8;--accent:#8ab4f8;--line:#333}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+main{max-width:720px;margin:0 auto;padding:40px 20px}
+a{color:var(--accent)}
+h1{margin:0 0 4px;font-size:1.8rem}
+h2{margin:32px 0 8px;font-size:1.2rem}
+.updated{margin:0 0 24px;color:var(--muted)}
+li{margin-bottom:6px}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<main>
+  <p><a href="index.html">&larr; CreatorBlock</a></p>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: October 1, 2026</p>
+
+  <p>CreatorBlock is a free browser extension that shows which creators appear in YouTube videos and lets you highlight, dim, or hide videos by creator. This page explains what data it handles. In short: there are no accounts, no ads, and no analytics or tracking.</p>
+
+  <h2>What stays on your device</h2>
+  <p>These are saved in your browser's extension storage and are not sent to us: your filters (My Filters), the creators you've added or looked up, the videos you've tagged, the tags you've disputed, your on/off setting, and the list of channels you've verified as yours.</p>
+
+  <h2>What is sent to our server</h2>
+  <ul>
+    <li><strong>Looking up tags.</strong> To find out who is tagged in the videos on your screen, the extension sends only the first 4 characters of a hash of each video ID (up to 50 at a time). It does not send the video IDs. The server replies with the tags for every video in those groups, and the extension picks out the ones it needs. This limits what the server learns about the videos you see, but it is not perfectly anonymous.</li>
+    <li><strong>Tagging and voting.</strong> When you tag a video, or confirm or dispute a tag, the extension sends the video ID, the creator's channel ID, name, picture link and handle, your vote, and your anonymous ID (below).</li>
+    <li><strong>Creator verification.</strong> If you use "I'm a creator", the extension sends your anonymous ID and the channel ID. Our server then reads that channel's public video feed on YouTube to look for the code you were given.</li>
+    <li><strong>Anonymous ID.</strong> A random ID is created on your device the first time you use the extension. It is not linked to your name, email, or Google account. The server keeps only a scrambled (salted and hashed) version of it, used to prevent double voting and to remember which channels you've verified.</li>
+    <li><strong>Network addresses.</strong> Requests go through Cloudflare, which can see IP addresses as part of delivering the service. Our server uses a salted hash of your address only to limit abuse, and does not store it with your votes or tags.</li>
+  </ul>
+
+  <h2>What we store</h2>
+  <p>Tags (which creator appears in which video), votes tied to a hashed anonymous ID, public creator details (name, picture link, handle), and verified channel owners. This is kept until it is removed. To ask for removal or correction, contact us below.</p>
+
+  <h2>Requests to YouTube</h2>
+  <p>When you search for a creator or paste a channel link, the extension asks youtube.com directly. Those requests are handled under YouTube's and Google's own privacy policies, not ours.</p>
+
+  <h2>Why the extension needs its permissions</h2>
+  <ul>
+    <li><strong>storage:</strong> to save your filters, known creators, settings, and anonymous ID on your device.</li>
+    <li><strong>Access to youtube.com:</strong> to read video links on YouTube pages so it can show badges and apply your filters, and to look up channel names.</li>
+  </ul>
+  <p>The extension does not load or run remote code.</p>
+
+  <h2>How we use data</h2>
+  <p>We use data only to provide the extension's single purpose: showing who appears in videos and applying your filters. We do not sell data, use it for advertising, or use it for anything unrelated. We do not share it with third parties except the infrastructure providers needed to run the service, such as Cloudflare.</p>
+
+  <h2>Community content</h2>
+  <p>Tags are made by the community and may be wrong. Creator names and pictures come from public YouTube pages. If you are a creator and want a tag removed or corrected, contact us below.</p>
+
+  <h2>Children</h2>
+  <p>CreatorBlock is not directed at children.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes, the new version will be posted on this page with a new date.</p>
+
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:amerabyad7071@gmail.com">amerabyad7071@gmail.com</a><br>
+  Issues: <a href="https://github.com/AmerAbyad/creatorblock/issues">github.com/YOUR-USERNAME/creatorblock/issues</a></p>
+
+  <footer>CreatorBlock is an independent project. It is not affiliated with, endorsed by, or sponsored by YouTube or Google.</footer>
+</main>
+</body>
+</html>
