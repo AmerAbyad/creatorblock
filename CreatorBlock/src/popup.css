@@ -1,0 +1,435 @@
+/* CreatorBlock toolbar popup */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 380px;
+    max-height: 600px;
+    margin: 0;
+    padding: 14px;
+
+    overflow-y: auto;
+
+    background: #181818;
+    color: white;
+
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+
+/* ---------- header and switch ---------- */
+
+.pop-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+}
+
+.pop-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.pop-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.pop-switch input {
+    display: none;
+}
+
+.pop-switch-track {
+    position: relative;
+
+    width: 34px;
+    height: 18px;
+
+    background: #555;
+
+    border-radius: 9px;
+
+    transition: background 0.15s;
+}
+
+.pop-switch-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+
+    width: 14px;
+    height: 14px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    transition: left 0.15s;
+}
+
+.pop-switch input:checked + .pop-switch-track {
+    background: #1e8e3e;
+}
+
+.pop-switch input:checked + .pop-switch-track .pop-switch-knob {
+    left: 18px;
+}
+
+.pop-paused {
+    margin-bottom: 12px;
+    padding: 8px 10px;
+
+    background: #3b2f00;
+    color: #ffd54f;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+}
+
+/* ---------- sections ---------- */
+
+.pop-section {
+    margin-bottom: 16px;
+    padding-top: 12px;
+
+    border-top: 1px solid #333;
+}
+
+.pop-section h2 {
+    margin: 0 0 8px;
+
+    font-size: 13px;
+    font-weight: bold;
+    color: #ccc;
+}
+
+.pop-empty,
+.pop-hint {
+    color: #888;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+    margin-bottom: 6px;
+}
+
+.pop-text {
+    margin: 0 0 10px;
+
+    color: #bbb;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.pop-notice {
+    margin: 6px 0;
+
+    color: #8ee79b;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.pop-error {
+    margin: 6px 0;
+
+    color: #ff8a80;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* ---------- rows ---------- */
+
+.pop-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 10px;
+}
+
+.pop-row > img {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    background: #444;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.pop-row-text {
+    flex: 1;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pop-row-name {
+    font-size: 13px;
+    font-weight: bold;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pop-row-meta {
+    color: #999;
+
+    font-size: 11px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.pop-row-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.pop-remove {
+    padding: 2px 4px;
+
+    background: transparent;
+    border: none;
+
+    color: #aaa;
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+.pop-remove:hover {
+    color: white;
+}
+
+/* ---------- inputs and buttons ---------- */
+
+.pop-input {
+    width: 100%;
+
+    padding: 9px 10px;
+    margin-bottom: 10px;
+
+    background: #252525;
+    color: white;
+
+    border: 1px solid #444;
+    border-radius: 6px;
+
+    outline: none;
+
+    font-size: 13px;
+}
+
+.pop-input:focus {
+    border-color: #777;
+}
+
+.pop-button {
+    padding: 7px 12px;
+    margin: 4px 6px 4px 0;
+
+    background: white;
+    color: #181818;
+
+    border: none;
+    border-radius: 6px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.pop-button:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.pop-button-quiet {
+    background: transparent;
+    color: white;
+
+    border: 1px solid #555;
+}
+
+.pop-lookup {
+    width: 100%;
+
+    margin-bottom: 10px;
+    padding: 8px;
+
+    background: transparent;
+    color: white;
+
+    border: 1px dashed #666;
+    border-radius: 6px;
+
+    font-size: 12px;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+/* ---------- creator (owner) tools ---------- */
+
+details summary {
+    color: #ccc;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+details > div {
+    margin-top: 10px;
+}
+
+.pop-owned {
+    margin-bottom: 6px;
+
+    color: #8ee79b;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.pop-step {
+    margin: 10px 0 6px;
+
+    font-size: 12px;
+    font-weight: bold;
+    color: #ccc;
+}
+
+.pop-code {
+    margin-bottom: 8px;
+    padding: 10px;
+
+    background: #252525;
+
+    border: 1px solid #444;
+    border-radius: 6px;
+
+    font-family: Consolas, monospace;
+    font-size: 14px;
+
+    user-select: all;
+}
+
+/* ---------- filters (shared with the video panel) ---------- */
+
+.creatorblock-mode {
+    width: 100%;
+
+    padding: 5px 6px;
+
+    background: #252525;
+    color: white;
+
+    border: 1px solid #444;
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.creatorblock-mode option {
+    background: #252525;
+    color: white;
+}
+
+.pop-row-line .creatorblock-mode {
+    width: auto;
+    max-width: 100%;
+}
+
+.creatorblock-chip {
+    padding: 2px 7px;
+
+    border-radius: 10px;
+
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+
+    color: white;
+}
+
+.creatorblock-chip-like    { background: #1e8e3e; }
+.creatorblock-chip-warn    { background: #c62828; }
+.creatorblock-chip-dim     { background: #8d6e00; }
+.creatorblock-chip-hide    { background: #616161; }
+.creatorblock-chip-creator { background: #1a73e8; }
+.creatorblock-chip-admin   { background: #6a1b9a; }
+
+.creatorblock-legend-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+
+    margin-bottom: 8px;
+}
+
+.creatorblock-legend-icon {
+    width: 20px;
+    height: 20px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 12px;
+    color: white;
+}
+
+.creatorblock-legend-like { background: #1e8e3e; }
+.creatorblock-legend-warn { background: #c62828; }
+.creatorblock-legend-dim  { background: #8d6e00; }
+.creatorblock-legend-hide { background: #616161; }
+
+.creatorblock-legend-text {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #ddd;
+}
+
+.creatorblock-legend-text strong {
+    color: white;
+}
+
+.creatorblock-legend-note {
+    margin-top: 10px;
+
+    font-size: 11px;
+    line-height: 1.4;
+    color: #999;
+}

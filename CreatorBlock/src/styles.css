@@ -1,0 +1,533 @@
+/* ============================================================
+   THUMBNAIL BADGES
+   (positioned by JS via getBoundingClientRect - see content.js.
+   Badges live in a floating overlay layer, not inside the
+   thumbnail itself, so top/left/max-width are set inline per
+   badge rather than fixed values here.)
+   ============================================================ */
+
+.creatorblock-thumbnail-creators {
+    position: fixed;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    z-index: 2;
+    pointer-events: none;
+}
+
+.creatorblock-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    flex: 0 1 auto;
+    min-width: 0;
+
+    padding: 3px 7px 3px 3px;
+
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+
+    border-radius: 20px;
+
+    font: bold 11px Arial, sans-serif;
+    white-space: nowrap;
+}
+
+.creatorblock-badge span {
+    min-width: 0;
+    max-width: 110px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Like = green */
+.creatorblock-badge-like {
+    background: rgba(30, 142, 62, 0.95);
+}
+
+/* Warn / Dim / Hide = red */
+.creatorblock-badge-warn,
+.creatorblock-badge-dim,
+.creatorblock-badge-hide {
+    background: rgba(200, 30, 30, 0.95);
+}
+
+.creatorblock-avatar {
+    width: 20px;
+    height: 20px;
+
+    flex-shrink: 0;
+
+    background: #444;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+/* ============================================================
+   FILTER STATES (applied to the whole video card)
+   ============================================================ */
+
+/* Hide: removed from the page */
+.creatorblock-hidden {
+    display: none !important;
+}
+
+/* Dim: faded and blurred until you hover it */
+.creatorblock-dim {
+    opacity: 0.3;
+    transition: opacity 0.15s;
+}
+
+.creatorblock-dim img:not(.creatorblock-avatar) {
+    filter: blur(6px) grayscale(1);
+    transition: filter 0.15s;
+}
+
+.creatorblock-dim:hover {
+    opacity: 1;
+}
+
+.creatorblock-dim:hover img:not(.creatorblock-avatar) {
+    filter: none;
+}
+
+/* Warn: red outline around the thumbnail */
+.creatorblock-warn :is(yt-thumbnail-view-model, ytd-thumbnail),
+.creatorblock-warn:is(yt-thumbnail-view-model, ytd-thumbnail) {
+    box-shadow: 0 0 0 3px #e53935;
+    border-radius: 12px;
+}
+
+/* Like: green outline around the thumbnail */
+.creatorblock-like :is(yt-thumbnail-view-model, ytd-thumbnail),
+.creatorblock-like:is(yt-thumbnail-view-model, ytd-thumbnail) {
+    box-shadow: 0 0 0 3px #1e8e3e;
+    border-radius: 12px;
+}
+
+
+/* ============================================================
+   PLAYER BUTTON
+   ============================================================ */
+
+.creatorblock-player-button {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    border: none;
+    border-radius: 18px;
+    background: transparent;
+
+    cursor: pointer;
+    opacity: 0.9;
+
+    transition: background-color 0.1s ease, opacity 0.1s ease;
+}
+
+.creatorblock-player-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    opacity: 1;
+}
+
+/* Held down, or the panel is currently open - same "lit" treatment
+   YouTube gives its own toggled-on buttons (e.g. Autoplay). */
+.creatorblock-player-button:active,
+.creatorblock-player-button.creatorblock-active {
+    background-color: rgba(255, 255, 255, 0.3);
+    opacity: 1;
+}
+
+.creatorblock-player-icon {
+    width: 20px;
+    height: 20px;
+
+    display: block;
+}
+
+
+/* ============================================================
+   PANEL
+   ============================================================ */
+
+.creatorblock-player-panel {
+    position: absolute;
+    right: 12px;
+    bottom: 60px;
+
+    box-sizing: border-box;
+    width: 320px;
+    max-height: calc(100% - 90px);
+    overflow-y: auto;
+
+    padding: 16px;
+
+    background: rgba(20, 20, 20, 0.97);
+    color: white;
+
+    border-radius: 10px;
+
+    font-family: Arial, sans-serif;
+
+    z-index: 999999;
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.creatorblock-panel-header {
+    font-size: 16px;
+    font-weight: bold;
+
+    margin-bottom: 4px;
+}
+
+.creatorblock-panel-subtitle {
+    font-size: 12px;
+    color: #aaa;
+    line-height: 1.4;
+
+    margin-bottom: 14px;
+}
+
+
+/* ---------- creator rows ---------- */
+
+.creatorblock-creator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 12px;
+}
+
+.creatorblock-creator > img {
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    background: #444;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.creatorblock-creator-text {
+    flex: 1;
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.creatorblock-creator-name {
+    font-size: 14px;
+    font-weight: bold;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.creatorblock-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.creatorblock-chip {
+    padding: 2px 7px;
+
+    border-radius: 10px;
+
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+
+    color: white;
+}
+
+.creatorblock-chip-like    { background: #1e8e3e; }
+.creatorblock-chip-warn    { background: #c62828; }
+.creatorblock-chip-dim     { background: #8d6e00; }
+.creatorblock-chip-hide    { background: #616161; }
+.creatorblock-chip-creator { background: #1a73e8; }
+.creatorblock-chip-admin   { background: #6a1b9a; }
+
+.creatorblock-mode {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 5px 6px;
+
+    background: #252525;
+    color: white;
+
+    border: 1px solid #444;
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.creatorblock-mode option {
+    background: #252525;
+    color: white;
+}
+
+.creatorblock-remove {
+    padding: 2px 4px;
+
+    background: transparent;
+    border: none;
+
+    color: #aaa;
+    font-size: 14px;
+    white-space: nowrap;
+
+    cursor: pointer;
+}
+
+.creatorblock-remove:hover {
+    color: white;
+}
+
+.creatorblock-confirm {
+    padding: 2px 4px;
+
+    background: transparent;
+    border: none;
+
+    color: #6ccf6c;
+    font-size: 15px;
+
+    cursor: pointer;
+}
+
+.creatorblock-confirm:hover {
+    color: #9dff9d;
+}
+
+
+/* ---------- what each filter does ---------- */
+
+.creatorblock-legend {
+    margin-bottom: 14px;
+}
+
+.creatorblock-legend-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+
+    margin-bottom: 8px;
+}
+
+.creatorblock-legend-icon {
+    width: 20px;
+    height: 20px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 12px;
+    color: white;
+}
+
+.creatorblock-legend-like { background: #1e8e3e; }
+.creatorblock-legend-warn { background: #c62828; }
+.creatorblock-legend-dim  { background: #8d6e00; }
+.creatorblock-legend-hide { background: #616161; }
+
+.creatorblock-legend-text {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #ddd;
+}
+
+.creatorblock-legend-text strong {
+    color: white;
+}
+
+.creatorblock-legend-note {
+    margin-top: 10px;
+
+    font-size: 11px;
+    line-height: 1.4;
+    color: #999;
+}
+
+
+/* ---------- buttons ---------- */
+
+.creatorblock-add {
+    width: 100%;
+
+    padding: 8px;
+
+    background: white;
+    color: #181818;
+
+    border: none;
+    border-radius: 6px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.creatorblock-add:hover {
+    opacity: 0.85;
+}
+
+.creatorblock-cancel {
+    width: 100%;
+    margin-top: 8px;
+
+    padding: 8px;
+
+    background: transparent;
+    color: white;
+
+    border: 1px solid #444;
+    border-radius: 6px;
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+.creatorblock-cancel:hover {
+    background: #292929;
+}
+
+
+/* ---------- search / add ---------- */
+
+.creatorblock-search {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 9px 10px;
+    margin-bottom: 12px;
+
+    background: #252525;
+    color: white;
+
+    border: 1px solid #444;
+    border-radius: 6px;
+
+    outline: none;
+
+    font-size: 13px;
+}
+
+.creatorblock-search:focus {
+    border-color: #777;
+}
+
+.creatorblock-search-results {
+    min-height: 40px;
+    margin-bottom: 4px;
+}
+
+.creatorblock-search-hint {
+    color: #888;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+    margin-bottom: 10px;
+}
+
+.creatorblock-search-error {
+    color: #ff8a80;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+    margin-bottom: 10px;
+}
+
+.creatorblock-search-result {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
+    padding: 8px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+.creatorblock-search-result:hover {
+    background: #292929;
+}
+
+.creatorblock-search-result img {
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    background: #444;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.creatorblock-result-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    min-width: 0;
+}
+
+.creatorblock-result-name {
+    min-width: 0;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    color: white;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.creatorblock-result-meta {
+    min-width: 0;
+
+    font-size: 11px;
+
+    color: #999;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.creatorblock-lookup {
+    border: 1px dashed #555;
+}
