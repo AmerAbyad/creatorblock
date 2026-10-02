@@ -25,6 +25,15 @@ h2{margin:36px 0 12px;font-size:1.25rem}
 .dot{display:inline-block;width:10px;height:10px;margin-right:8px;border-radius:50%}
 .like{background:#1e8e3e}.warn{background:#c62828}.dim{background:#8d6e00}.hide{background:#616161}
 ol{padding-left:20px}
+.shots{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;-webkit-overflow-scrolling:touch}
+.shots figure{flex:0 0 88%;margin:0;scroll-snap-align:start}
+.shots img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line)}
+.shots figcaption{margin-top:8px;color:var(--muted);font-size:.9rem}
+.shot-nav{display:flex;gap:8px;justify-content:flex-end;margin-top:4px}
+.shot-nav button{padding:6px 14px;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:8px;font-size:1rem;cursor:pointer}
+.coffee{display:inline-block;padding:12px 22px;background:#ffdd00;color:#1a1a1a;font-weight:700;border-radius:999px;text-decoration:none}
+.coffee:hover{filter:brightness(.93)}
+[hidden]{display:none!important}
 footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
 footer a{margin-right:14px}
 </style>
@@ -49,6 +58,26 @@ footer a{margin-right:14px}
   </div>
   <p>Filters only change thumbnails in lists (home, search, recommendations). A video you open directly always plays.</p>
 
+  <h2>Screenshots</h2>
+  <div class="shots" id="shots" role="region" aria-label="CreatorBlock screenshots" tabindex="0">
+    <figure>
+      <img src="screenshot-thumbnails.jpg" width="1280" height="800" alt="A channel page where video thumbnails show creator badges: a red outline for Warn, a green outline for Like, and a faded thumbnail for Dim.">
+      <figcaption>Badges show who's in each video. Your filters decide what happens.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshot-player.jpg" width="1280" height="800" loading="lazy" alt="A video page with the CreatorBlock panel open in the player, listing the creators in the video with confirm and dispute buttons, an Add Creator button, and a My Filters button.">
+      <figcaption>Tag who's in a video from the player: confirm (&check;) or dispute (&times;) what others added.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshot-filters.jpg" width="1280" height="800" loading="lazy" alt="The CreatorBlock popup explaining the four filters: Like, Warn, Dim, and Hide.">
+      <figcaption>Four filters. You decide what happens.</figcaption>
+    </figure>
+  </div>
+  <div class="shot-nav" id="shotNav" hidden>
+    <button type="button" id="shotPrev" aria-label="Previous screenshot">&larr;</button>
+    <button type="button" id="shotNext" aria-label="Next screenshot">&rarr;</button>
+  </div>
+
   <h2>How to use it</h2>
   <ol>
     <li>Browse YouTube as usual. Badges appear on videos the community has tagged.</li>
@@ -59,11 +88,26 @@ footer a{margin-right:14px}
   <h2>Privacy</h2>
   <p>No accounts and no tracking. Your filters stay in your browser, and the extension doesn't send the IDs of the videos you see. <a href="privacy.html">Read the full privacy policy</a>.</p>
 
+  <h2>Support the project</h2>
+  <p>CreatorBlock is free. If you find it useful, you can chip in toward its development.</p>
+  <p><a class="coffee" href="https://buymeacoffee.com/abyadartistry" target="_blank" rel="noopener">&#9749; Buy me a coffee</a></p>
+
   <footer>
     <a href="privacy.html">Privacy policy</a>
     <a href="https://github.com/AmerAbyad/creatorblock/issues">Support</a>
     <p>CreatorBlock is an independent project. It is not affiliated with, endorsed by, or sponsored by YouTube or Google.</p>
   </footer>
 </main>
+<script>
+(function () {
+  var track = document.getElementById('shots');
+  var nav = document.getElementById('shotNav');
+  if (!track || !nav) return;
+  nav.hidden = false;
+  function go(dir) { track.scrollBy({ left: dir * track.clientWidth * 0.9, behavior: 'smooth' }); }
+  document.getElementById('shotPrev').addEventListener('click', function () { go(-1); });
+  document.getElementById('shotNext').addEventListener('click', function () { go(1); });
+})();
+</script>
 </body>
 </html>
