@@ -19,6 +19,8 @@ h1{margin:12px 0 8px;font-size:2rem}
 .tag{margin:0 auto 20px;max-width:540px;color:var(--muted);font-size:1.1rem}
 .cta{display:inline-block;padding:12px 24px;background:var(--accent);color:#fff;font-weight:700;border-radius:999px;text-decoration:none}
 .cta:hover{filter:brightness(.92)}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.cta-fx{background:#e66000}
 .note{margin:12px 0 0;color:var(--muted);font-size:.9rem}
 h2{margin:36px 0 12px;font-size:1.25rem}
 .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
@@ -46,8 +48,11 @@ footer a{margin-right:14px}
     <img src="icon128.png" alt="CreatorBlock icon">
     <h1>CreatorBlock</h1>
     <p class="tag">See who appears in a YouTube video before you watch it, and choose what happens to videos with creators you like or dislike.</p>
-    <a class="cta" href="https://chromewebstore.google.com/detail/creatorblock/domjgpdaienbeocfkfgnadgiigmibanh">Add to Chrome</a>
-    <p class="note">Free. Also works in Brave, Edge, and Opera. A Firefox version is in review.</p>
+    <div class="cta-row">
+      <a class="cta" href="https://chromewebstore.google.com/detail/creatorblock/domjgpdaienbeocfkfgnadgiigmibanh">Add to Chrome</a>
+      <a class="cta cta-fx" href="https://addons.mozilla.org/en-US/firefox/addon/creatorblock/">Add to Firefox</a>
+    </div>
+    <p class="note">Free. The Chrome version also works in Brave, Edge, and Opera.</p>
   </div>
 
   <h2>What it does</h2>
